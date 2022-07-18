@@ -8,7 +8,7 @@ const App = (props) => {
     console.dir(event.target.newnote.value);
     event.preventDefault();
     const newNote = {
-      id: Object.keys(notes).length,
+      id: Object.keys(notes).length + 1,
       content: event.target.newnote.value,
       date: Date.now(),
       important: true,

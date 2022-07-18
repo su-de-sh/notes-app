@@ -21,11 +21,23 @@ const App = (props) => {
     setNote("");
   };
 
+  const [showAll, setShowAll] = useState(true);
+  const toggleShow = () => {
+    setShowAll(!showAll);
+  };
+
+  let notesToShow = showAll
+    ? notes
+    : notes.filter((note) => {
+        return note.important === true;
+      });
+
   return (
     <div>
       <h1>Notes</h1>
+      <button onClick={toggleShow}>Show {showAll ? "All" : "important"}</button>
       <ul>
-        {notes.map((note) => (
+        {notesToShow.map((note) => (
           <Note key={note.id} note={note} />
         ))}
       </ul>

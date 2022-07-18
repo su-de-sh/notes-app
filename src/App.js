@@ -2,19 +2,23 @@ import { useState } from "react";
 import Note from "./components/Note";
 
 const App = (props) => {
-  const [notes, setNote] = useState(props.notes);
+  const [notes, setNotes] = useState(props.notes);
+  const [note, setNote] = useState("");
+
+  const newNote = (event) => {
+    setNote(event.target.value);
+  };
 
   const addNote = (event) => {
-    console.dir(event.target.newnote.value);
     event.preventDefault();
     const newNote = {
       id: notes.length + 1,
-      content: event.target.newnote.value,
+      content: note,
       date: Date.now(),
-      important: true,
+      important: Math.random() > 0.5 ? true : false,
     };
-    setNote([...notes, newNote]);
-    event.target.newnote.value = "";
+    setNotes([...notes, newNote]);
+    setNote("");
   };
 
   return (
@@ -26,7 +30,7 @@ const App = (props) => {
         ))}
       </ul>
       <form onSubmit={addNote}>
-        <input name="newnote" type="text" />
+        <input value={note} onChange={newNote} type="text" />
         <button type="submit">submit</button>
       </form>
     </div>

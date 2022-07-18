@@ -8,12 +8,13 @@ const App = (props) => {
     console.dir(event.target.newnote.value);
     event.preventDefault();
     const newNote = {
-      id: Object.keys(notes).length + 1,
+      id: notes.length + 1,
       content: event.target.newnote.value,
       date: Date.now(),
       important: true,
     };
     setNote([...notes, newNote]);
+    event.target.newnote.value = "";
   };
 
   return (

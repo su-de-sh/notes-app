@@ -4,7 +4,7 @@ import Error from "./Error";
 import axios from "axios";
 
 axios
-  .get("http://localhost:3001/notes1")
+  .get("http://localhost:3001/notes")
   .then((response) => {
     ReactDOM.createRoot(document.getElementById("root")).render(
       <App notes={response.data} />

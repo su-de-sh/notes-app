@@ -24,13 +24,16 @@ const App = () => {
   const addNote = (event) => {
     event.preventDefault();
     const newNote = {
-      id: notes.length + 1,
+      // id: notes.length + 1,
       content: note,
-      date: Date.now(),
+      date: new Date().toISOString(),
       important: Math.random() > 0.5 ? true : false,
     };
-    setNotes([...notes, newNote]);
-    setNote("");
+
+    axios.post("http://localhost:3001/notes", newNote).then((respone) => {
+      setNotes([...notes, respone.data]);
+      setNote("");
+    });
   };
 
   const [showAll, setShowAll] = useState(true);

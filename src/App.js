@@ -10,8 +10,8 @@ const App = () => {
   useEffect(() => {
     noteService
       .getAll()
-      .then((respone) => {
-        setNotes(respone.data);
+      .then((data) => {
+        setNotes(data);
       })
       .catch((error) => {
         console.log(error.message);
@@ -31,8 +31,8 @@ const App = () => {
       important: Math.random() > 0.5 ? true : false,
     };
 
-    noteService.create(newNote).then((respone) => {
-      setNotes([...notes, respone.data]);
+    noteService.create(newNote).then((data) => {
+      setNotes([...notes, data]);
       setNote("");
     });
   };
@@ -52,8 +52,8 @@ const App = () => {
     const note = notes.find((n) => n.id === id);
 
     let updatedNote = { ...note, important: !note.important };
-    noteService.update(id, updatedNote).then((response) => {
-      setNotes(notes.map((note) => (note.id !== id ? note : response.data)));
+    noteService.update(id, updatedNote).then((data) => {
+      setNotes(notes.map((note) => (note.id !== id ? note : data)));
     });
   };
 

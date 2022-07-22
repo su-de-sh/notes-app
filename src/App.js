@@ -48,7 +48,14 @@ const App = () => {
       });
 
   const toggleImportace = (id) => {
-    console.log("toggle importance" + id);
+    const note = notes.find((n) => n.id === id);
+
+    let updatedNote = { ...note, important: !note.important };
+    axios
+      .put(`http://localhost:3001/notes/${id}`, updatedNote)
+      .then((response) => {
+        setNotes(notes.map((note) => (note.id !== id ? note : response.data)));
+      });
   };
 
   return (

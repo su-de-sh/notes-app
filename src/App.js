@@ -52,9 +52,15 @@ const App = () => {
     const note = notes.find((n) => n.id === id);
 
     let updatedNote = { ...note, important: !note.important };
-    noteService.update(id, updatedNote).then((data) => {
-      setNotes(notes.map((note) => (note.id !== id ? note : data)));
-    });
+    noteService
+      .update(id, updatedNote)
+      .then((data) => {
+        setNotes(notes.map((note) => (note.id !== id ? note : data)));
+      })
+      .catch((error) => {
+        alert(`the note '${note.content}' was already deleted from server`);
+        setNotes(notes.filter((n) => n.id !== id));
+      });
   };
 
   return (

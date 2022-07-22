@@ -47,13 +47,21 @@ const App = () => {
         return note.important === true;
       });
 
+  const toggleImportace = (id) => {
+    console.log("toggle importance" + id);
+  };
+
   return (
     <div>
       <h1>Notes</h1>
       <button onClick={toggleShow}>{showAll ? "All" : "Important"}</button>
       <ul>
         {notesToShow.map((note) => (
-          <Note key={note.id} note={note} />
+          <Note
+            key={note.id}
+            note={note}
+            toggleImportace={() => toggleImportace(note.id)}
+          />
         ))}
       </ul>
       <form onSubmit={addNote}>

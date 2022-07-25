@@ -11,7 +11,7 @@ const Footer = () => {
     style = { ...style, color: "green" };
   }
 
-  return <p style={style}>NoteApp Copyright Tjcenter</p>;
+  return <p style={style}>NoteApp Copyright Tejcenter</p>;
 };
 
 export default Footer;

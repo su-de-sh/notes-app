@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Note from "./components/Note";
 import Footer from "./components/Footer";
+import Notification from "./components/Notification";
 
 import noteService from "./services/notes";
 
@@ -67,6 +68,7 @@ const App = () => {
   return (
     <div>
       <h1>Notes</h1>
+      <Notification msg="Hey! this is a message!" />
       <button onClick={toggleShow}>{showAll ? "All" : "Important"}</button>
       <ul>
         {notesToShow.map((note) => (

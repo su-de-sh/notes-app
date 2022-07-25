@@ -8,6 +8,7 @@ import noteService from "./services/notes";
 const App = () => {
   const [notes, setNotes] = useState([]);
   const [note, setNote] = useState("");
+  const [message, setMessage] = useState(null);
 
   useEffect(() => {
     noteService
@@ -60,7 +61,10 @@ const App = () => {
         setNotes(notes.map((note) => (note.id !== id ? note : data)));
       })
       .catch((error) => {
-        alert(`the note '${note.content}' was already deleted from server`);
+        setMessage("This note is deleted!!");
+        setTimeout(() => {
+          setMessage(null);
+        }, 3000);
         setNotes(notes.filter((n) => n.id !== id));
       });
   };
@@ -68,7 +72,7 @@ const App = () => {
   return (
     <div>
       <h1>Notes</h1>
-      <Notification msg="Hey! this is a message!" />
+      <Notification msg={message} />
       <button onClick={toggleShow}>{showAll ? "All" : "Important"}</button>
       <ul>
         {notesToShow.map((note) => (

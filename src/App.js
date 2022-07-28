@@ -71,6 +71,7 @@ const App = () => {
 
   return (
     <div>
+      <h5>*This is deployed in heroku.</h5>
       <h1>Notes</h1>
       <Notification msg={message} />
       <button onClick={toggleShow}>{showAll ? "All" : "Important"}</button>

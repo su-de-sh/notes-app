@@ -17,7 +17,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "back-server": "json-server --port 3001 --watch db.json"
+    "back-server": "json-server --port 3002 --watch db.json"
   },
   "eslintConfig": {
     "extends": [

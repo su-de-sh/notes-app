@@ -34,10 +34,18 @@ const App = () => {
       important: Math.random() > 0.5 ? true : false,
     };
 
-    noteService.create(newNote).then((data) => {
-      setNotes([...notes, data]);
-      setNote("");
-    });
+    noteService
+      .create(newNote)
+      .then((data) => {
+        setNotes([...notes, data]);
+        setNote("");
+      })
+      .catch((error) => {
+        setMessage(error.response.data.error);
+        setTimeout(() => {
+          setMessage(null);
+        }, 3000);
+      });
   };
 
   const [showAll, setShowAll] = useState(true);

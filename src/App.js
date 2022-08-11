@@ -4,11 +4,14 @@ import Footer from "./components/Footer";
 import Notification from "./components/Notification";
 
 import noteService from "./services/notes";
+import loginService from "./services/login";
 
 const App = () => {
   const [notes, setNotes] = useState([]);
   const [note, setNote] = useState("");
   const [message, setMessage] = useState(null);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   useEffect(() => {
     noteService
@@ -77,11 +80,42 @@ const App = () => {
       });
   };
 
+  const handleLogin = async (event) => {
+    event.preventDefault();
+    const data = await loginService.login({ username, password });
+
+    console.log(data.token);
+  };
   return (
     <div>
-      <h5>*This is deployed in heroku.</h5>
       <h1>Notes</h1>
       <Notification msg={message} />
+      <form onSubmit={handleLogin}>
+        <div>
+          username:
+          <input
+            type="text"
+            name="Username"
+            value={username}
+            onChange={(event) => {
+              setUsername(event.target.value);
+            }}
+          />
+        </div>
+        <div>
+          password:
+          <input
+            type="password"
+            value={password}
+            onChange={(event) => {
+              setPassword(event.target.value);
+            }}
+          />
+        </div>
+        <div>
+          <button type="submit">login</button>
+        </div>
+      </form>
       <button onClick={toggleShow}>{showAll ? "All" : "Important"}</button>
       <ul>
         {notesToShow.map((note) => (

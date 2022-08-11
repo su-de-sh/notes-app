@@ -5,8 +5,13 @@ const getAll = () => {
   return axios.get(baseUrl).then((response) => response.data);
 };
 
-const create = (newObject) => {
-  return axios.post(baseUrl, newObject).then((response) => response.data);
+const create = (newObject, token) => {
+  const config = {
+    headers: { Authorization: `bearer ${token} ` },
+  };
+  return axios
+    .post(baseUrl, newObject, config)
+    .then((response) => response.data);
 };
 
 const update = (id, newObject) => {

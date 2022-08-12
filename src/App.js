@@ -6,10 +6,11 @@ import Notification from "./components/Notification";
 import Togglable from "./components/Togglable";
 import noteService from "./services/notes";
 import loginService from "./services/login";
+import NoteForm from "./components/NoteForm";
 
 const App = () => {
   const [notes, setNotes] = useState([]);
-  const [note, setNote] = useState("");
+
   const [message, setMessage] = useState(null);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -31,24 +32,23 @@ const App = () => {
       });
   }, []);
 
-  const newNote = (event) => {
-    setNote(event.target.value);
-  };
+  // const newNote = (event) => {
+  //   setNote(event.target.value);
+  // };
 
-  const addNote = (event) => {
-    event.preventDefault();
-    const newNote = {
-      // id: notes.length + 1,
-      content: note,
-      date: new Date().toISOString(),
-      important: Math.random() > 0.5 ? true : false,
-    };
+  const addNote = (noteObject) => {
+    // event.preventDefault();
+    // const newNote = {
+    //   // id: notes.length + 1,
+    //   content: note,
+    //   date: new Date().toISOString(),
+    //   important: Math.random() > 0.5 ? true : false,
+    // };
 
     noteService
-      .create(newNote, user.token)
+      .create(noteObject, user.token)
       .then((data) => {
         setNotes([...notes, data]);
-        setNote("");
       })
       .catch((error) => {
         setMessage(error.response.data.error);
@@ -121,10 +121,9 @@ const App = () => {
   );
 
   const noteForm = () => (
-    <form onSubmit={addNote}>
-      <input value={note} onChange={newNote} type="text" />
-      <button type="submit">submit</button>
-    </form>
+    <Togglable buttonLabel="new note">
+      <NoteForm createNote={addNote} />
+    </Togglable>
   );
   return (
     <div>

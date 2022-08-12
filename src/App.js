@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import Note from "./components/Note";
 import Footer from "./components/Footer";
 import Notification from "./components/Notification";
-
+import Togglable from "./components/Togglable";
 import noteService from "./services/notes";
 import loginService from "./services/login";
 
@@ -108,6 +108,18 @@ const App = () => {
     }
   };
 
+  const loginForm = () => (
+    <Togglable buttonLabel="login">
+      <LoginForm
+        username={username}
+        password={password}
+        handleUsernameChange={({ target }) => setUsername(target.value)}
+        handlePasswordChange={({ target }) => setPassword(target.value)}
+        handleSubmit={handleLogin}
+      />
+    </Togglable>
+  );
+
   const noteForm = () => (
     <form onSubmit={addNote}>
       <input value={note} onChange={newNote} type="text" />
@@ -118,15 +130,7 @@ const App = () => {
     <div>
       <h1>Notes</h1>
       <Notification msg={message} />
-      {user === null && (
-        <LoginForm
-          handleLogin={handleLogin}
-          username={username}
-          setUsername={setUsername}
-          password={password}
-          setPassword={setPassword}
-        />
-      )}
+      {user === null && loginForm()}
       {user !== null && (
         <div>
           <p>{user.name} logged-in</p>

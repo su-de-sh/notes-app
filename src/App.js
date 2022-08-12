@@ -1,3 +1,4 @@
+import { LoginForm } from "./components/LoginForm";
 import { useState, useEffect } from "react";
 import Note from "./components/Note";
 import Footer from "./components/Footer";
@@ -107,35 +108,6 @@ const App = () => {
     }
   };
 
-  const loginForm = () => (
-    <form onSubmit={handleLogin}>
-      <div>
-        username:
-        <input
-          type="text"
-          name="Username"
-          value={username}
-          onChange={(event) => {
-            setUsername(event.target.value);
-          }}
-        />
-      </div>
-      <div>
-        password:
-        <input
-          type="password"
-          value={password}
-          onChange={(event) => {
-            setPassword(event.target.value);
-          }}
-        />
-      </div>
-      <div>
-        <button type="submit">login</button>
-      </div>
-    </form>
-  );
-
   const noteForm = () => (
     <form onSubmit={addNote}>
       <input value={note} onChange={newNote} type="text" />
@@ -146,7 +118,15 @@ const App = () => {
     <div>
       <h1>Notes</h1>
       <Notification msg={message} />
-      {user === null && loginForm()}
+      {user === null && (
+        <LoginForm
+          handleLogin={handleLogin}
+          username={username}
+          setUsername={setUsername}
+          password={password}
+          setPassword={setPassword}
+        />
+      )}
       {user !== null && (
         <div>
           <p>{user.name} logged-in</p>

@@ -1,25 +1,22 @@
 import React from "react";
 export function LoginForm({
-  handleLogin,
   username,
-
-  setUsername,
   password,
-  setPassword,
+  handleUsernameChange,
+  handlePasswordChange,
+  handleSubmit,
 }) {
   return (
     <>
       <h2>Login</h2>
-      <form onSubmit={handleLogin}>
+      <form onSubmit={handleSubmit}>
         <div>
           username:
           <input
             type="text"
             name="Username"
             value={username}
-            onChange={(event) => {
-              setUsername(event.target.value);
-            }}
+            onChange={handleUsernameChange}
           />
         </div>
         <div>
@@ -27,9 +24,7 @@ export function LoginForm({
           <input
             type="password"
             value={password}
-            onChange={(event) => {
-              setPassword(event.target.value);
-            }}
+            onChange={handlePasswordChange}
           />
         </div>
         <div>

@@ -1,5 +1,5 @@
 import { LoginForm } from "./components/LoginForm";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Note from "./components/Note";
 import Footer from "./components/Footer";
 import Notification from "./components/Notification";
@@ -15,7 +15,7 @@ const App = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [user, setUser] = useState(null);
-
+  const noteFormRef = useRef();
   useEffect(() => {
     const user = window.localStorage.getItem("loggedNoteappUser");
     if (user) {
@@ -44,7 +44,7 @@ const App = () => {
     //   date: new Date().toISOString(),
     //   important: Math.random() > 0.5 ? true : false,
     // };
-
+    noteFormRef.current.toggleVisibility();
     noteService
       .create(noteObject, user.token)
       .then((data) => {
@@ -121,7 +121,7 @@ const App = () => {
   );
 
   const noteForm = () => (
-    <Togglable buttonLabel="new note">
+    <Togglable buttonLabel="new note" ref={noteFormRef}>
       <NoteForm createNote={addNote} />
     </Togglable>
   );

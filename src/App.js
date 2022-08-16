@@ -78,7 +78,7 @@ const App = () => {
       .then((data) => {
         setNotes(notes.map((note) => (note.id !== id ? note : data)));
       })
-      .catch((error) => {
+      .catch(() => {
         setMessage("This note is deleted!!");
         setTimeout(() => {
           setMessage(null);

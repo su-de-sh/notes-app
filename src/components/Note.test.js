@@ -17,8 +17,8 @@ test("renders content", () => {
   //   const element = screen.getByText(
   //     "Component testing is done with react-testing-library"
   //   );
-
   const element = container.querySelector(".note");
+  screen.debug();
   expect(element).toBeDefined();
   expect(element).toHaveTextContent(
     "Component testing is done with react-testing-library"

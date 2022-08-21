@@ -69,7 +69,7 @@ const App = () => {
         return note.important === true;
       });
 
-  const toggleImportace = (id) => {
+  const toggleImportance = (id) => {
     const note = notes.find((n) => n.id === id);
 
     let updatedNote = { ...note, important: !note.important };
@@ -142,7 +142,7 @@ const App = () => {
           <Note
             key={note.id}
             note={note}
-            toggleImportace={() => toggleImportace(note.id)}
+            toggleImportance={() => toggleImportance(note.id)}
           />
         ))}
       </ul>

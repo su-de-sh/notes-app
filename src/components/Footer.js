@@ -7,9 +7,7 @@ const Footer = () => {
     color: "red",
   };
 
-  if (true) {
-    style = { ...style, color: "green" };
-  }
+  style = { ...style, color: "green" };
 
   return <p style={style}>NoteApp Copyright Tejcenter</p>;
 };

@@ -38,7 +38,7 @@ test("clicking the button calls event handler once", async () => {
 
   const user = userEvent.setup();
   const button = screen.getByText("important");
-  screen.debug(button);
+
   await user.click(button);
 
   expect(mockHandler.mock.calls).toHaveLength(1);
